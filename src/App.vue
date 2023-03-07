@@ -1,15 +1,25 @@
 <template>
   <div class="App">
-    <h2>app</h2>
-    <router-view/>
-    <router-link to="/home">首页</router-link>
-    <router-link to="/favor">收藏</router-link>
-    <router-link to="/order">订单</router-link>
-    <router-link to="/message">消息</router-link>
+
+    <router-view v-slot="props">
+      <keep-alive include="home">
+        <component :is="props.Component"></component>
+      </keep-alive>
+    </router-view>
+
+    <!--<TabBar v-if="!route.meta.hideTabBar"/>-->
+    <TabBar/>
+    <Loading/>
   </div>
 </template>
 
 <script setup>
+import TabBar from "@/components/tabBar/TabBar.vue";
+import {useRoute} from "vue-router";
+import Loading from "@/components/loading/Loading.vue";
+
+const route = useRoute()
+
 
 </script>
 
